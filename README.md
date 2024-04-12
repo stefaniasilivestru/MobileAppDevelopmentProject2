@@ -1,4 +1,4 @@
-# Tripfy
+# Tripify
 
 A new Flutter project.
 
