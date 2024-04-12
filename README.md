@@ -1,4 +1,4 @@
-# project2_flutter
+# Tripify
 
 A new Flutter project.
 
