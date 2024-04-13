@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'app.dart';
+import 'screens/profile.dart';
+import 'screens/routes.dart';
+import 'screens/contactus.dart';
+import 'screens/share.dart';
+import 'screens/settings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,12 +20,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _selectedIndex = 0;
 
-  void _incrementCounter() {
+  final List<Widget> _screens = [
+    const ProfilePage()
+  ];
+
+  void onItemTapped(int index) {
     setState(() {
-
-      _counter++;
+      _selectedIndex = index;
     });
   }
 
@@ -29,7 +37,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-
         backgroundColor: const Color(0xFF1c2143),
         titleTextStyle: const TextStyle(
           color: Colors.white,
@@ -48,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: BoxDecoration(
                 color: Color(0xFF1c2143),
               ),
+              padding: EdgeInsets.all(60.0),
               child: Text('Tripify Menu',
                   style: TextStyle(color: Colors.white, fontSize: 24.0)),
             ),
@@ -62,9 +70,50 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: const Icon(Icons.account_circle, color: Color(0xFF1c2143)),
               title: const Text('Profile'),
               onTap: () {
-                // Go to the profile page
-
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.map_rounded, color: Color(0xFF1c2143)),
+              title: const Text('Routes'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const RoutesPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.call, color: Color(0xFF1c2143)),
+              title: const Text('Contact Us'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ContactusPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.ios_share_outlined, color: Color(0xFF1c2143)),
+              title: const Text('Share'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SharePage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings, color: Color(0xFF1c2143)),
+              title: const Text('Settings'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SettingsPage()),
+                );
               },
             ),
           ]
@@ -104,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Go to the profile page',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16.0,
+                  fontSize: 20.0,
                 ),
               ),
             )
@@ -115,20 +164,3 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile Page'),
-      ),
-      body: const Center(
-        child: Text(
-          'This is the profile page',
-        ),
-      ),
-    );
-  }
-}
