@@ -5,6 +5,7 @@ import 'screens/routes.dart';
 import 'screens/contactus.dart';
 import 'screens/share.dart';
 import 'screens/settings.dart';
+import 'package:logger/logger.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +35,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('Building MyHomePage');
+    var logger = Logger();
+    logger.d('Building MyHomePage');
+    logger.w("Warning message");
+    // logger.e("Error message");
+
 
     return Scaffold(
       appBar: AppBar(
@@ -120,9 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
         )
       ),
       body: Center(
-
         child: Column(
-
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
@@ -149,11 +154,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF2a9d8f))),
-              child: const Text('Go to the profile page',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
+                backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF2a9d8f)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                ),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text('GO TO PROFILE PAGE',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                  ),
                 ),
               ),
             )
