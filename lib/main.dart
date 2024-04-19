@@ -5,6 +5,7 @@ import 'screens/routes.dart';
 import 'screens/contactus.dart';
 import 'screens/share.dart';
 import 'screens/settings.dart';
+import 'screens/map.dart';
 import 'package:logger/logger.dart';
 
 void main() {
@@ -23,9 +24,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [
-    const ProfilePage()
-  ];
+  // final List<Widget> _screens = [
+  //    ProfilePage()
+  // ];
 
   void onItemTapped(int index) {
     setState(() {
@@ -79,17 +80,27 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
                 );
               },
             ),
             ListTile(
-              leading: const Icon(Icons.map_rounded, color: Color(0xFF1c2143)),
+              leading: const Icon(Icons.collections, color: Color(0xFF1c2143)),
               title: const Text('Routes'),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const RoutesPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.map_rounded, color: Color(0xFF1c2143)),
+              title: const Text('Map'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MapPage()),
                 );
               },
             ),
@@ -150,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 // navigate to the profile page
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
                 );
               },
               style: ButtonStyle(

@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'register.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +56,7 @@ class ProfilePage extends StatelessWidget {
              const SizedBox(height: 16.0),
              const TextField(
                decoration: InputDecoration(
-                  labelText: 'Email',
+                 labelText: 'Email',
                  hintText: 'Type your email address',
                  border: OutlineInputBorder(),
                  contentPadding: EdgeInsets.all(12.0),

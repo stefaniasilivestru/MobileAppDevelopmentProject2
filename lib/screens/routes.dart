@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:logger/logger.dart';
+import 'package:project2_flutter/screens/viewPlaces.dart';
 
 class RoutesPage extends StatefulWidget {
   const RoutesPage({super.key});
@@ -10,6 +12,10 @@ class RoutesPage extends StatefulWidget {
 
 class _RoutesPageState extends State<RoutesPage> {
   final List<String> routes = [];
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _latitudeController = TextEditingController();
+  final TextEditingController _longitudeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +103,7 @@ class _RoutesPageState extends State<RoutesPage> {
                         child: ElevatedButton(
                           onPressed: () {
                             // Add place functionality
+                            _addPlace();
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF2a9d8f)), // Background color
@@ -118,6 +125,7 @@ class _RoutesPageState extends State<RoutesPage> {
                         child: ElevatedButton(
                           onPressed: () {
                             // View places functionality
+                            _viewPlaces();
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF1c2143)), // Background color
@@ -245,6 +253,79 @@ class _RoutesPageState extends State<RoutesPage> {
       },
     );
   }
+
+  void _addPlace() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add Place'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: _nameController,
+                decoration: const InputDecoration(labelText: 'Name'),
+              ),
+              TextField(
+                controller: _latitudeController,
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                decoration: const InputDecoration(labelText: 'Latitude'),
+              ),
+              TextField(
+                controller: _longitudeController,
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                decoration: const InputDecoration(labelText: 'Longitude'),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                String name = _nameController.text;
+                double latitude = double.parse(_latitudeController.text);
+                double longitude = double.parse(_longitudeController.text);
+
+                // Do something with the entered data, e.g., add to a list
+                // or call a function to add the place to your data model
+                _savePlace(name, latitude, longitude);
+                Navigator.pop(context); // Close the dialog
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _savePlace(String name, double latitude, double longitude) {
+    // Implement your logic to save the place
+    // e.g., add to a list or call a function to save to a database
+    print('Adding Place: $name, Latitude: $latitude, Longitude: $longitude');
+    _showToast('Place added: $name');
+    Logger logger = Logger();
+    logger.d('Adding Place: $name, Latitude: $latitude, Longitude: $longitude');
+  }
+
+  void _viewPlaces() {
+    // Implement your logic to view places
+    // e.g., show a list of places
+    _showToast('Viewing places');
+    Navigator.push(context,  MaterialPageRoute(builder: (context) => const ViewPlacesPage()));
+
+
+
+
+  }
+
+
 
   void _showToast(String message) {
     Fluttertoast.showToast(
