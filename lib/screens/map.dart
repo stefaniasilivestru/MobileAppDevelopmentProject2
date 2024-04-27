@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:async';
+import 'package:project2_flutter/db/database_helper.dart';
 
 import 'mapView.dart';
 
@@ -17,6 +18,7 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   StreamSubscription<Position>? _positionStreamSubscription;
+  DatabaseHelper db = DatabaseHelper.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +115,15 @@ class _MapPageState extends State<MapPage> {
               (Position position) {
             writePositionToFile(position);
             Logger().d('Position: ${position.latitude}, ${position.longitude}');
+          },
+        );
+
+    // insert location into the database
+    _positionStreamSubscription =
+        Geolocator.getPositionStream(locationSettings: locationSettings).listen(
+              (Position position) {
+            db.insertCoordinate(position);
+            Logger().d('Position into the database: ${position.latitude}, ${position.longitude}');
           },
         );
   }

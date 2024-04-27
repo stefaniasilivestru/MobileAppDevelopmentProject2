@@ -318,7 +318,7 @@ class _RoutesPageState extends State<RoutesPage> {
     // Implement your logic to view places
     // e.g., show a list of places
     _showToast('Viewing places');
-    Navigator.push(context,  MaterialPageRoute(builder: (context) => const ViewPlacesPage()));
+    Navigator.push(context,  MaterialPageRoute(builder: (context) => ViewPlacesPage()));
 
   }
 
