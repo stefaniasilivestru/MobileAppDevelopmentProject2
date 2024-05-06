@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:project2_flutter/firebase_options.dart';
 import 'app.dart';
 import 'screens/profile.dart';
 import 'screens/routes.dart';
@@ -8,7 +10,11 @@ import 'screens/settings.dart';
 import 'screens/map.dart';
 import 'package:logger/logger.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options : DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
