@@ -9,6 +9,7 @@ import 'screens/share.dart';
 import 'screens/settings.dart';
 import 'screens/map.dart';
 import 'package:logger/logger.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
