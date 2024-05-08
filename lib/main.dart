@@ -46,9 +46,6 @@ class _MyHomePageState extends State<MyHomePage> {
     print('Building MyHomePage');
     var logger = Logger();
     logger.d('Building MyHomePage');
-    logger.w("Warning message");
-    // logger.e("Error message");
-
 
     return Scaffold(
       appBar: AppBar(
@@ -113,11 +110,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               leading: const Icon(Icons.call, color: Color(0xFF1c2143)),
-              title: const Text('Contact Us'),
+              title: const Text('Feedback'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ContactusPage()),
+                  MaterialPageRoute(builder: (context) => ContactusPage()),
                 );
               },
             ),

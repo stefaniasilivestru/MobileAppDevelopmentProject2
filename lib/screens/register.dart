@@ -105,21 +105,10 @@ class _RegisterPageState extends State<RegisterPage> {
   void _singUp() async {
     String email = _emailController.text;
     String password = _passwordController.text;
+
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
     if (user != null) {
-      if (user.email == email) {
-        Fluttertoast.showToast(
-          msg: 'User already exists!',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0
-        );
-        return;
-      }
       Fluttertoast.showToast(
         msg: 'User created successfully!',
         toastLength: Toast.LENGTH_SHORT,
