@@ -197,7 +197,6 @@ class _ContactusPageState extends State<ContactusPage> {
                   }
                 }
             )
-
           ],
         )
       )
@@ -213,11 +212,11 @@ class _ContactusPageState extends State<ContactusPage> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Login Required'),
+            title: const Text('Log in Required'),
             content: const SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text('You need to login to submit feedback.'),
+                  Text('You need to log in to submit feedback.'),
                 ],
               ),
             ),
@@ -229,7 +228,7 @@ class _ContactusPageState extends State<ContactusPage> {
                 },
               ),
               TextButton(
-                child: const Text('Login'),
+                child: const Text('Log in'),
                 onPressed: () {
                   Navigator.of(context).pop();
                   Navigator.push(

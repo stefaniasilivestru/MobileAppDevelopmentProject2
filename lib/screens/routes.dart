@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logger/logger.dart';
+import 'package:project2_flutter/screens/profile.dart';
 import 'package:project2_flutter/screens/viewPlaces.dart';
+import 'package:project2_flutter/screens/viewPlacesOnline..dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RoutesPage extends StatefulWidget {
   const RoutesPage({super.key});
@@ -12,14 +16,17 @@ class RoutesPage extends StatefulWidget {
 }
 
 class _RoutesPageState extends State<RoutesPage> {
-  final List<String> routes = [];
-
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _routeNameController = TextEditingController();
+  final TextEditingController _placeNameController = TextEditingController();
   final TextEditingController _latitudeController = TextEditingController();
   final TextEditingController _longitudeController = TextEditingController();
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
+    User? user = _auth.currentUser;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1c2143),
@@ -34,131 +41,277 @@ class _RoutesPageState extends State<RoutesPage> {
           color: Colors.white,
         ),
       ),
-      body: Padding (
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget> [
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                _viewPlacesOffline();
-              },
-              style: ButtonStyle(
-                backgroundColor:
-                MaterialStateProperty.all<Color>(
-                    const Color(0xFF2a9d8f)),
-                // Background color
-                foregroundColor:
-                MaterialStateProperty.all<Color>(
-                    Colors.white),
-                // Text color
-                shape: MaterialStateProperty.all<
-                    RoundedRectangleBorder>(
-                  const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                    // Set border radius to zero for square corners
-                    side: BorderSide.none, // Remove border
+      body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              const SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  _viewPlacesOffline();
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(const Color(0xFF2a9d8f)),
+                  // Background color
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  // Text color
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                      // Set border radius to zero for square corners
+                      side: BorderSide.none, // Remove border
+                    ),
                   ),
                 ),
+                child: const Text('View Places Offline Mode'),
               ),
-              child: const Text('View Places Offline Mode'),
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                _showToast('View Places Online Mode');
-                StreamBuilder(
-                  stream: FirebaseDatabase.instance.reference().child('routes').onValue,
+              StreamBuilder(
+                  stream: FirebaseDatabase.instance
+                      .reference()
+                      .child('routes')
+                      .onValue,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
                     } else if (snapshot.hasError) {
-                      return const Text('Error loading feedbacks');
+                      return const Center(
+                        child: Text('An error occurred'),
+                      );
                     } else {
-                      List<Widget> routeList = [];
-                      Map<dynamic, dynamic> routes = snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
+                      List<Widget> routesList = [];
+                      Map<dynamic, dynamic> routes = snapshot
+                          .data!.snapshot.value as Map<dynamic, dynamic>;
                       if (routes != null) {
                         routes.forEach((key, value) {
-                          routeList.add(
-                            ListTile(
-                              title: Text(value['routeName']),
-                            ),
+                          routesList.add(
+                           Card(
+                             margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                             elevation: 4.0,
+                             child: Padding(
+                               padding: const EdgeInsets.all(10.0),
+                               child: Column(
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+                                   Text(
+                                     value['routeName'],
+                                     style: const TextStyle(
+                                       fontSize: 20.0,
+                                       fontWeight: FontWeight.bold,
+                                       color: Color(0xFF1c2143),
+                                     ),
+                                   ),
+                                   const SizedBox(height: 8.0),
+                                   Row(
+                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                     children: [
+                                       Expanded(
+                                           child: ElevatedButton(
+                                             onPressed: () {
+                                               // view weather
+                                           },
+                                             style: ButtonStyle(
+                                               backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF1c2143)), // Background color
+                                               foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Text color
+                                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                 const RoundedRectangleBorder(
+                                                   borderRadius: BorderRadius.zero, // Set border radius to zero for square corners
+                                                   side: BorderSide.none, // Remove border
+                                                 ),
+                                               ),
+                                             ),
+                                             child: const Text('View Weather', style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
+                                           ),
+                                       ),
+                                       const SizedBox(width: 8.0),
+                                       Expanded(
+                                           child: ElevatedButton(
+                                             onPressed: () {
+                                               // view route
+                                           },
+                                             style: ButtonStyle(
+                                               backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF1c2143)), // Background color
+                                               foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Text color
+                                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                 const RoundedRectangleBorder(
+                                                   borderRadius: BorderRadius.zero, // Set border radius to zero for square corners
+                                                   side: BorderSide.none, // Remove border
+                                                 ),
+                                               ),
+                                             ),
+                                             child: const Text('View Route'),
+                                           ),
+                                       ),
+                                     ],
+                                   ),
+                                   const SizedBox(height: 8.0),
+                                   Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                // save the routeId in the shared preferences to be able to get it in the view places page
+                                                SharedPreferences.getInstance().then((prefs) {
+                                                  prefs.setString('routeId', key);
+                                                });
+                                                Logger().d('Route ID: $key');
+
+                                                _addPlace(context, user);
+                                            },
+                                              style: ButtonStyle(
+                                                backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF2a9d8f)), // Background color
+                                                foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Text color
+                                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                  const RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.zero, // Set border radius to zero for square corners
+                                                    side: BorderSide.none, // Remove border
+                                                  ),
+                                                ),
+                                              ),
+                                              child: const Text('Add Place', style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
+                                            ),
+                                        ),
+                                        const SizedBox(width: 8.0),
+                                        Expanded(
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                // view places
+                                                SharedPreferences.getInstance().then((prefs) {
+                                                  prefs.setString('routeId', key);
+                                                });
+                                                Logger().d('Route ID: $key');
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => ViewPlacesOnlinePage()));
+                                            },
+                                              style: ButtonStyle(
+                                                backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF1c2143)), // Background color
+                                                foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Text color
+                                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                  const RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.zero, // Set border radius to zero for square corners
+                                                    side: BorderSide.none, // Remove border
+                                                  ),
+                                                ),
+                                              ),
+                                              child: const Text('View Places', style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
+                                            ),
+                                        ),
+                                        const SizedBox(width: 8.0),
+                                        Expanded(
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              _deleteRoute(key);
+                                            },
+                                            style: ButtonStyle(
+                                              backgroundColor: MaterialStateProperty.all<Color>(Colors.black), // Background color
+                                              foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Text color
+                                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                const RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.zero, // Set border radius to zero for square corners
+                                                  side: BorderSide.none, // Remove border
+                                                ),
+                                              ),
+                                            ),
+                                            child: const Text('Delete Route', style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
+                                          ),
+                                        ),
+                                      ],
+                                   )
+                                 ]
+                               )
+                             )
+                           )
                           );
                         });
                       }
-                      Logger().d('Route list: $routeList');
-                      return ListView(
-                        children: routeList,
+                      return Column(
+                        children: routesList,
                       );
                     }
-                  },
-                );
-              },
-              style: ButtonStyle(
-                backgroundColor:
-                MaterialStateProperty.all<Color>(
-                    const Color(0xFF2a9d8f)),
-                // Background color
-                foregroundColor:
-                MaterialStateProperty.all<Color>(
-                    Colors.white),
-                // Text color
-                shape: MaterialStateProperty.all<
-                    RoundedRectangleBorder>(
-                  const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                    // Set border radius to zero for square corners
-                    side: BorderSide.none, // Remove border
-                  ),
-                ),
-              ),
-              child: const Text('List Routes'),
-            ),
-          ],
-        )
-      ),
+                  })
+            ],
+          )),),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add route functionality
-          _addRoute();
+          _addRoute(context, user);
         },
         child: const Icon(Icons.add),
       ),
     );
   }
 
-  void _addRoute() {
-    // show dialog to add route
-    String newRoute = '';
+  void _addRoute(BuildContext context, User? user) {
+    // show dialog to add route name into the database
+    // if user is not logged in, show a dialog to ask user to login
+    if (user == null) {
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Log in Required'),
+            content: const SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('You need to log in to add routes.'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('Log in'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: const Text('Add Route'),
-          content: TextField(
-            onChanged: (value) {
-              newRoute = value; // update the name
-            },
-            decoration: const InputDecoration(
-              hintText: 'Enter route name',
-            ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextField(
+                controller: _routeNameController,
+                decoration: const InputDecoration(labelText: 'Route Name'),
+              ),
+            ],
           ),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pop(context);
-                _showToast('Route not added');
+                Navigator.of(context).pop();
               },
               child: const Text('Cancel'),
             ),
-            ElevatedButton(
+            TextButton(
               onPressed: () {
-                setState(() {
-                  routes.add(newRoute);
-                });
-                Navigator.pop(context);
-                _showToast('Route added: $newRoute');
+                _addRouteToDatabase(user);
+                Navigator.of(context).pop();
               },
               child: const Text('Add'),
             ),
@@ -168,59 +321,105 @@ class _RoutesPageState extends State<RoutesPage> {
     );
   }
 
-  void _deleteRoute(int index) {
-    // show dialog to delete route
+  void _addRouteToDatabase(User? user) {
+    DatabaseReference routesRef =
+        FirebaseDatabase.instance.reference().child('routes');
+
+    String newRouteKey = routesRef.push().key ?? '';
+    String routeName = _routeNameController.text;
+    // Create a map for the route data
+    Map<String, dynamic> routeData = {
+      'routeName': routeName,
+      'routeId': newRouteKey,
+      'places': [],
+    };
+
+    // Add places to the route
+    // List<Map<String, dynamic>> places = [];
+    // Map<String, dynamic> placeData = {
+    //   'latitude': 40.4168, // Example latitude
+    //   'longitude': -3.7038, // Example longitude
+    //   'placeName': 'Casa de Papel', // Example place name
+    // };
+
+    // String newPlaceKey = FirebaseDatabase.instance
+    //         .reference()
+    //         .child('routes/$newRouteKey/places')
+    //         .push()
+    //         .key ??
+    //     '';
+    // placeData['placeId'] = newPlaceKey;
+    //
+    // places.add(placeData);
+    // routeData['places'] = places;
+
+    // set in the database
+    routesRef.child(newRouteKey).set(routeData).then((_) {
+      _showToast('Route added successfully');
+    }).catchError((error) {
+      _showToast('Failed to add route: $error');
+    });
+  }
+
+  void _addPlace(BuildContext context, User? user) {
+    // show dialog to add route name into the database
+    // if user is not logged in, show a dialog to ask user to login
+    if (user == null) {
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Log in Required'),
+            content: const SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('You need to log in to add places on routes.'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('Log in'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Delete Route'),
-          content: Text('Are you sure you want to delete ${routes[index]}?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                _showToast('Route not deleted');
-              },
-              child: const Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  routes.removeAt(index);
-                });
-                Navigator.pop(context);
-                _showToast('Route deleted');
-              },
-              child: const Text('Delete'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _addPlace() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
           title: const Text('Add Place'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: <Widget>[
               TextField(
-                controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
+                controller: _placeNameController,
+                decoration: const InputDecoration(labelText: 'Place Name'),
               ),
               TextField(
                 controller: _latitudeController,
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 decoration: const InputDecoration(labelText: 'Latitude'),
               ),
               TextField(
                 controller: _longitudeController,
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 decoration: const InputDecoration(labelText: 'Longitude'),
               ),
             ],
@@ -228,22 +427,25 @@ class _RoutesPageState extends State<RoutesPage> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.of(context).pop();
               },
               child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
-                String name = _nameController.text;
-                double latitude = double.parse(_latitudeController.text);
-                double longitude = double.parse(_longitudeController.text);
-
-                // Do something with the entered data, e.g., add to a list
-                // or call a function to add the place to your data model
-                _savePlace(name, latitude, longitude);
-                Navigator.pop(context); // Close the dialog
+                // Add place to the route
+                SharedPreferences.getInstance().then((prefs) {
+                  String routeId = prefs.getString('routeId') ?? '';
+                  Map<String, dynamic> placeData = {
+                    'placeName': _placeNameController.text,
+                    'latitude': double.parse(_latitudeController.text),
+                    'longitude': double.parse(_longitudeController.text),
+                  };
+                  _addPlaceToDatabase(user, routeId, placeData);
+                });
+                Navigator.of(context).pop();
               },
-              child: const Text('Save'),
+              child: const Text('Add'),
             ),
           ],
         );
@@ -251,17 +453,71 @@ class _RoutesPageState extends State<RoutesPage> {
     );
   }
 
-  void _savePlace(String name, double latitude, double longitude) {
-    print('Adding Place: $name, Latitude: $latitude, Longitude: $longitude');
-    _showToast('Place added: $name');
-    Logger logger = Logger();
-    logger.d('Adding Place: $name, Latitude: $latitude, Longitude: $longitude');
+  void _addPlaceToDatabase(User? user, String routeId, Map<String, dynamic> placeData) {
+    DatabaseReference placesRef = FirebaseDatabase.instance.reference().child('routes/$routeId/places');
+    String newPlaceKey = placesRef.push().key ?? '';
+    placeData['placeId'] = newPlaceKey;
+    placesRef.child(newPlaceKey).set(placeData).then((_) {
+      _showToast('Place added successfully');
+    }).catchError((error) {
+      _showToast('Failed to add place: $error');
+    });
+
   }
 
+
+
+  void _deleteRoute(String key) {
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Delete route"),
+            content: const Text("Are you sure you want to delete this route?"),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Delete feedback from database
+                  DatabaseReference feedbackRef = FirebaseDatabase.instance.reference().child('routes').child(key);
+                  feedbackRef.remove().then((_) {
+                    Fluttertoast.showToast(
+                        msg: "Route deleted successfully.",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        backgroundColor: const Color(0xFF2a9d8f)
+                    );
+                  }).catchError((error) {
+                    print("Failed to delete route: $error");
+                    Fluttertoast.showToast(
+                        msg: "Failed to delete route.",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        backgroundColor: Colors.red
+                    );
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Delete'),
+              ),
+            ],
+          );
+        }
+    );
+  }
   // list of places saved from CSV and local DB
   void _viewPlacesOffline() {
     _showToast('Viewing places');
-    Navigator.push(context,  MaterialPageRoute(builder: (context) => ViewPlacesPage()));
+    Navigator.push(
+      context as BuildContext,
+      MaterialPageRoute(builder: (context) => ViewPlacesPage()),
+    );
   }
 
   void _showToast(String message) {
@@ -275,10 +531,4 @@ class _RoutesPageState extends State<RoutesPage> {
       fontSize: 16.0,
     );
   }
-
-  // List routes from firebase routes database
-  void _listRoutes() {
-
-  }
-
 }
