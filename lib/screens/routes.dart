@@ -6,6 +6,8 @@ import 'package:logger/logger.dart';
 import 'package:project2_flutter/screens/profile.dart';
 import 'package:project2_flutter/screens/viewPlaces.dart';
 import 'package:project2_flutter/screens/viewPlacesOnline..dart';
+import 'package:project2_flutter/screens/viewRoute.dart';
+import 'package:project2_flutter/screens/weather.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RoutesPage extends StatefulWidget {
@@ -113,7 +115,10 @@ class _RoutesPageState extends State<RoutesPage> {
                                        Expanded(
                                            child: ElevatedButton(
                                              onPressed: () {
-                                               // view weather
+                                               SharedPreferences.getInstance().then((prefs) {
+                                                 prefs.setString('routeName', value['routeName']);
+                                               });
+                                               Navigator.push(context, MaterialPageRoute(builder: (context) => const WeatherPage()));
                                            },
                                              style: ButtonStyle(
                                                backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF1c2143)), // Background color
@@ -132,7 +137,10 @@ class _RoutesPageState extends State<RoutesPage> {
                                        Expanded(
                                            child: ElevatedButton(
                                              onPressed: () {
-                                               // view route
+                                                SharedPreferences.getInstance().then((prefs) {
+                                                  prefs.setString('routeId', key);
+                                                });
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => ViewRoutePage()));
                                            },
                                              style: ButtonStyle(
                                                backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF1c2143)), // Background color
