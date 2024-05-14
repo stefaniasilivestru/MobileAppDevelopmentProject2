@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/logger.dart';
+import 'package:project2_flutter/app.dart';
 
-class SettingsPage extends StatelessWidget {
+
+
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
+
+  @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage>
+{
+  String? _selectedLanguage = 'English';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1c2143),
-        title: const Text(
-          'Settings',
-          style: TextStyle(
+        title:  Text(
+          AppLocalizations.of(context)!.settings_text,
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 24.0,
           ),
@@ -24,11 +36,11 @@ class SettingsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 36),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+           Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              'Change Language',
-              style: TextStyle(
+              AppLocalizations.of(context)!.change_language,
+              style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF1c2143),
@@ -38,18 +50,26 @@ class SettingsPage extends StatelessWidget {
           const SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: DropdownButton<String>(
-              items: <String>['English', 'Spanish'] // Replace with your list of languages
-                  .map((String value) {
+            child: DropdownButton
+              (
+              value: _selectedLanguage,
+              items: <String>['English', 'Spanish']
+                  .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
                 );
               }).toList(),
-              onChanged: (String? newValue) {
-                // Implement language change logic
+              onChanged: (String? value) {
+                setState(() {
+                  _selectedLanguage = value;
+                  if (value == 'Spanish') {
+                    MyApp.setLocale(context, const Locale('es', ''));
+                  } else {
+                    MyApp.setLocale(context, const Locale('en', ''));
+                  }
+                });
               },
-              hint: const Text('Select Language'),
             ),
           ),
           const Spacer(),
@@ -65,4 +85,5 @@ class SettingsPage extends StatelessWidget {
       ),
     );
   }
+
 }

@@ -9,7 +9,8 @@ import 'screens/share.dart';
 import 'screens/settings.dart';
 import 'screens/map.dart';
 import 'package:logger/logger.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,10 +31,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-
-  // final List<Widget> _screens = [
-  //    ProfilePage()
-  // ];
 
   void onItemTapped(int index) {
     setState(() {
@@ -130,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               leading: const Icon(Icons.settings, color: Color(0xFF1c2143)),
-              title: const Text('Settings'),
+              title: Text(AppLocalizations.of(context)!.settings_text),
               onTap: () {
                 Navigator.push(
                   context,

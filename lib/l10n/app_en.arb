@@ -1,0 +1,11 @@
+{
+  "settings_text": "Settings",
+  "@settings_text": {
+    "description": "The nav drawer settings text"
+  },
+  "change_language": "Change Language",
+    "@change_language": {
+        "description": "Change language text"
+    }
+}
+
