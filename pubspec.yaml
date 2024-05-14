@@ -64,12 +64,27 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash:  ^2.2.0+1
+
+flutter_icons:
+  color: "#1c2143"
+  android: true
+  ios: true
+  image_path: "assets/logo_tripify.jpg"
+
+flutter_native_splash:
+    color: "#1c2143"
+    image: "assets/logo_tripify.jpg"
+    android: true
+    ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

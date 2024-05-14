@@ -21,17 +21,12 @@ class _ViewPlacesPageState extends State<ViewPlacesPage> {
     super.initState();
     _loadCoordinates();
     _loadDbCoordinates();
-    logger.d('Loaded coordinates: $_coordinates');
   }
-
 
   Future<void> _loadCoordinates() async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/gps_coordinates.csv');
-    logger.d('Loading file: ${file.path}');
-
     List<String> lines = await file.readAsLines();
-    logger.d('Loaded lines: $lines');
 
     setState(() {
       _coordinates = lines.map((line) => line.split(';')).toList();
@@ -53,7 +48,6 @@ class _ViewPlacesPageState extends State<ViewPlacesPage> {
   }
 
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -78,9 +72,12 @@ class _ViewPlacesPageState extends State<ViewPlacesPage> {
             final longitude = double.parse(coordinates[2]);
             final timestamp = DateTime.fromMillisecondsSinceEpoch(int.parse(coordinates[0]));
             final formattedTimestamp = DateFormat('yyyy-MM-dd HH:mm:ss').format(timestamp);
-            return ListTile(
-              title: Text('CSV data:\n Latitude: $latitude, Longitude: $longitude'),
-              subtitle: Text('Timestamp: $formattedTimestamp'),
+            return _buildListItem(
+              placeName: 'CSV data',
+              latitude: latitude,
+              longitude: longitude,
+              timestamp: formattedTimestamp,
+              isCSV: true,
             );
           } else {
             final dbIndex = index - _coordinates.length;
@@ -89,8 +86,12 @@ class _ViewPlacesPageState extends State<ViewPlacesPage> {
             final longitude = double.parse(coordinates[2]);
             final timestamp = DateTime.fromMillisecondsSinceEpoch(int.parse(coordinates[0]));
             final formattedTimestamp = DateFormat('yyyy-MM-dd HH:mm:ss').format(timestamp);
-            return ListTile(
-              title: Text('DB data:\n Timestamp: $formattedTimestamp, Latitude: $latitude, Longitude: $longitude', style: const TextStyle(color: Colors.blueAccent)),
+            return _buildListItem(
+              placeName: 'DB data',
+              latitude: latitude,
+              longitude: longitude,
+              timestamp: formattedTimestamp,
+              isCSV: false,
               onTap: () {
                 _showDeleteDialog(coordinates[0]);
               },
@@ -103,6 +104,71 @@ class _ViewPlacesPageState extends State<ViewPlacesPage> {
       ),
     );
   }
+
+  Widget _buildListItem({
+    required String placeName,
+    required double latitude,
+    required double longitude,
+    required String timestamp,
+    required bool isCSV,
+    Function()? onTap,
+    Function()? onLongPress,
+  }) {
+    final textColor = isCSV ? Colors.blueAccent : Color(0xFF1c2143);
+    return Card(
+      elevation: 4.0,
+      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: ListTile(
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              placeName,
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: textColor,
+              ),
+            ),
+            Text(
+              "Timestamp: $timestamp",
+              style: TextStyle(
+                fontSize: 14.0,
+                color: textColor,
+              ),
+            ),
+            const SizedBox(height: 8.0),
+            Row(
+              children: [
+                const Icon(Icons.location_on, color: Color(0xFF1c2143)),
+                const SizedBox(width: 8.0),
+                Text(
+                  "Latitude: $latitude",
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: textColor,
+                  ),
+                ),
+                const SizedBox(width: 8.0),
+                Text(
+                  "Longitude: $longitude",
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: textColor,
+                  ),
+                ),
+              ],
+            ),
+
+          ],
+        ),
+        onTap: onTap,
+        onLongPress: onLongPress,
+      ),
+    );
+  }
+
+
 
   void _showDeleteDialog(String timestamp) {
     showDialog(
