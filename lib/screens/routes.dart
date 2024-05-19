@@ -9,6 +9,7 @@ import 'package:project2_flutter/screens/viewPlacesOnline..dart';
 import 'package:project2_flutter/screens/viewRoute.dart';
 import 'package:project2_flutter/screens/weather.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RoutesPage extends StatefulWidget {
   const RoutesPage({super.key});
@@ -32,9 +33,9 @@ class _RoutesPageState extends State<RoutesPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1c2143),
-        title: const Text(
-          'Routes',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.routes_text,
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 24.0,
           ),
@@ -69,7 +70,7 @@ class _RoutesPageState extends State<RoutesPage> {
                     ),
                   ),
                 ),
-                child: const Text('View Places Offline Mode'),
+                child: Text(AppLocalizations.of(context)!.view_places_offline),
               ),
               StreamBuilder(
                   stream: FirebaseDatabase.instance
@@ -130,7 +131,7 @@ class _RoutesPageState extends State<RoutesPage> {
                                                  ),
                                                ),
                                              ),
-                                             child: const Text('View Weather', style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
+                                             child: Text(AppLocalizations.of(context)!.view_weather, style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
                                            ),
                                        ),
                                        const SizedBox(width: 8.0),
@@ -152,7 +153,7 @@ class _RoutesPageState extends State<RoutesPage> {
                                                  ),
                                                ),
                                              ),
-                                             child: const Text('View Route'),
+                                             child: Text(AppLocalizations.of(context)!.view_route, style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
                                            ),
                                        ),
                                      ],
@@ -182,7 +183,7 @@ class _RoutesPageState extends State<RoutesPage> {
                                                   ),
                                                 ),
                                               ),
-                                              child: const Text('Add Place', style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
+                                              child: Text(AppLocalizations.of(context)!.add_place, style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
                                             ),
                                         ),
                                         const SizedBox(width: 8.0),
@@ -206,7 +207,7 @@ class _RoutesPageState extends State<RoutesPage> {
                                                   ),
                                                 ),
                                               ),
-                                              child: const Text('View Places', style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
+                                              child: Text(AppLocalizations.of(context)!.view_place, style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
                                             ),
                                         ),
                                         const SizedBox(width: 8.0),
@@ -225,7 +226,7 @@ class _RoutesPageState extends State<RoutesPage> {
                                                 ),
                                               ),
                                             ),
-                                            child: const Text('Delete Route', style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
+                                            child: Text(AppLocalizations.of(context)!.delete_route, style: TextStyle(fontSize: 14.0), textAlign: TextAlign.center),
                                           ),
                                         ),
                                       ],
@@ -341,25 +342,6 @@ class _RoutesPageState extends State<RoutesPage> {
       'routeId': newRouteKey,
       'places': [],
     };
-
-    // Add places to the route
-    // List<Map<String, dynamic>> places = [];
-    // Map<String, dynamic> placeData = {
-    //   'latitude': 40.4168, // Example latitude
-    //   'longitude': -3.7038, // Example longitude
-    //   'placeName': 'Casa de Papel', // Example place name
-    // };
-
-    // String newPlaceKey = FirebaseDatabase.instance
-    //         .reference()
-    //         .child('routes/$newRouteKey/places')
-    //         .push()
-    //         .key ??
-    //     '';
-    // placeData['placeId'] = newPlaceKey;
-    //
-    // places.add(placeData);
-    // routeData['places'] = places;
 
     // set in the database
     routesRef.child(newRouteKey).set(routeData).then((_) {

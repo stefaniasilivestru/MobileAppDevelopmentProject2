@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class ViewRoutePage extends StatefulWidget {
@@ -43,7 +44,7 @@ class _ViewRoutePageState extends State<ViewRoutePage> {
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        title: const Text('View Route'),
+        title:  Text(AppLocalizations.of(context)!.view_route),
       ),
       body: StreamBuilder(
           stream: FirebaseDatabase.instance

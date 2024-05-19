@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:project2_flutter/firebase_auth_service/firebase_auth_service.dart';
 import 'package:project2_flutter/screens/profile.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        title: const Text('Register'),
+        title: Text(AppLocalizations.of(context)!.profile_register),
       ),
       body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -49,30 +50,30 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 TextField(
                   controller: _emailController,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    hintText: 'Type your email address',
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.all(12.0),
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.profile_email,
+                    hintText: AppLocalizations.of(context)!.profile_email_hint,
+                    border: const OutlineInputBorder(),
+                    contentPadding: const EdgeInsets.all(12.0),
                   ),
                 ),
                 const SizedBox(height: 16.0),
                 TextField(
                   controller: _passwordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    hintText: 'Type your password',
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.all(12.0),
+                  decoration:  InputDecoration(
+                    labelText: AppLocalizations.of(context)!.profile_password,
+                    hintText: AppLocalizations.of(context)!.profile_password_hint,
+                    border: const OutlineInputBorder(),
+                    contentPadding: const EdgeInsets.all(12.0),
                   ),
                 ),
                TextField(
                   controller: _confirmPasswordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Confirm password',
-                    hintText: 'Type your password again',
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.all(12.0),
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.profile_confirm_password,
+                    hintText: AppLocalizations.of(context)!.profile_confirm_password_hint,
+                    border: const OutlineInputBorder(),
+                    contentPadding: const EdgeInsets.all(12.0),
                   ),
                 ),
                 const SizedBox(height: 16.0),
@@ -90,7 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
-                  child: const Text('Create account',
+                  child: Text(AppLocalizations.of(context)!.profile_create_account,
                     style: TextStyle(
                       fontSize: 20.0,
                     ),

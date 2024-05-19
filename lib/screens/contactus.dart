@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:project2_flutter/screens/profile.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContactusPage extends StatefulWidget {
   const ContactusPage({super.key});
@@ -35,7 +36,7 @@ class _ContactusPageState extends State<ContactusPage> {
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        title: const Text('Feedback'),
+        title: Text(AppLocalizations.of(context)!.feedback_text),
       ),
       body:Padding (
         padding: const EdgeInsets.all(24.0),
@@ -44,17 +45,17 @@ class _ContactusPageState extends State<ContactusPage> {
           children:<Widget> [
             TextFormField(
               controller: _commentController,
-              decoration: const InputDecoration(
-                labelText: 'Comment',
-                hintText: 'Type your feedback here',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.feedback_comment,
+                hintText: AppLocalizations.of(context)!.feedback_hint,
                 border: OutlineInputBorder(),
                 contentPadding: EdgeInsets.all(16.0),
 
               ),
             ),
             const SizedBox(height: 16.0),
-            const Text('Rating',
-              style: TextStyle(fontSize: 18.0, color: Color(0xFF1c2143), fontWeight: FontWeight.bold
+            Text(AppLocalizations.of(context)!.feedback_raiting,
+              style: const TextStyle(fontSize: 18.0, color: Color(0xFF1c2143), fontWeight: FontWeight.bold
               ),
             ),
             Row(
@@ -116,9 +117,9 @@ class _ContactusPageState extends State<ContactusPage> {
                   ),
                 ),
               ),
-              child: const Text(
-                'Send',
-                style: TextStyle(
+              child:Text(
+                AppLocalizations.of(context)!.feedback_send,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,
                 ),

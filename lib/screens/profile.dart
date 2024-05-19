@@ -6,6 +6,7 @@ import 'package:project2_flutter/screens/routes.dart';
 import 'register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -37,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
           iconTheme: const IconThemeData(
             color: Colors.white,
           ),
-          title: const Text('Profile'),
+          title: Text(AppLocalizations.of(context)!.profile_text),
         ),
         body: StreamBuilder<User?>(
             stream: FirebaseAuth.instance.authStateChanges(),
@@ -77,9 +78,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                               ),
-                              child: const Text(
-                                'Go back to home page',
-                                style: TextStyle(
+                              child: Text(
+                                AppLocalizations.of(context)!.profile_go_to_home,
+                                style: const TextStyle(
                                   fontSize: 20.0,
                                 ),
                               ),
@@ -88,22 +89,22 @@ class _ProfilePageState extends State<ProfilePage> {
                             TextField(
                               controller: _emailController,
                               // Assign controller to TextField
-                              decoration: const InputDecoration(
-                                labelText: 'Email',
-                                hintText: 'Type your email address',
-                                border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.all(12.0),
+                              decoration: InputDecoration(
+                                labelText: AppLocalizations.of(context)!.profile_email,
+                                hintText: AppLocalizations.of(context)!.profile_email_hint,
+                                border: const OutlineInputBorder(),
+                                contentPadding: const EdgeInsets.all(12.0),
                               ),
                             ),
                             const SizedBox(height: 16.0),
                             TextField(
                               controller: _passwordController,
                               // Assign controller to TextField
-                              decoration: const InputDecoration(
-                                labelText: 'Password',
-                                hintText: 'Type your password',
-                                border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.all(12.0),
+                              decoration: InputDecoration(
+                                labelText: AppLocalizations.of(context)!.profile_password,
+                                hintText: AppLocalizations.of(context)!.profile_password_hint,
+                                border: const OutlineInputBorder(),
+                                contentPadding: const EdgeInsets.all(12.0),
                               ),
                             ),
                             const SizedBox(height: 16.0),
@@ -130,9 +131,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                               ),
-                              child: const Text(
-                                'Log in',
-                                style: TextStyle(
+                              child:  Text(
+                                AppLocalizations.of(context)!.profile_login,
+                                style: const TextStyle(
                                   fontSize: 20.0,
                                 ),
                               ),
@@ -162,18 +163,18 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                               ),
-                              child: const Text(
-                                'Sign in with Google',
-                                style: TextStyle(
+                              child: Text(
+                                AppLocalizations.of(context)!.profile_sign_in_with_google,
+                                style: const TextStyle(
                                   fontSize: 20.0,
                                 ),
                               ),
                             ),
                             const SizedBox(height: 40.0),
-                            const Text(
-                              'Don\'t have an account? Register here',
+                             Text(
+                              AppLocalizations.of(context)!.profile_register_text,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16.0,
                                 color: Color(0xFF1c2143),
                                 fontWeight: FontWeight.bold,
@@ -189,7 +190,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                       builder: (context) =>
                                           const RegisterPage()),
                                 );
-                                _showToast("Ready to register!");
                               },
                               style: ButtonStyle(
                                 backgroundColor:
@@ -209,9 +209,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                               ),
-                              child: const Text(
-                                'Register',
-                                style: TextStyle(
+                              child:  Text(
+                                AppLocalizations.of(context)!.profile_register,
+                                style: const TextStyle(
                                   fontSize: 20.0,
                                 ),
                               ),

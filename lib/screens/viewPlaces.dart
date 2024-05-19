@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:project2_flutter/db/database_helper.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewPlacesPage extends StatefulWidget {
   @override
@@ -52,9 +52,8 @@ class _ViewPlacesPageState extends State<ViewPlacesPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1c2143),
-        title: const Text(
-          'View Places',
-          style: TextStyle(
+        title:  Text(AppLocalizations.of(context)!.view_place,
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 24.0,
           ),

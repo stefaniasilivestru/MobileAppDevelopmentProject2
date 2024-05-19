@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SharePage extends StatelessWidget {
   const SharePage({super.key});
@@ -15,16 +16,16 @@ class SharePage extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        title: const Text('Share'),
+        title: Text(AppLocalizations.of(context)!.share_text),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Share this app with your friends!',
+            Text(
+              AppLocalizations.of(context)!.share_page_text,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24.0,
                 color: Color(0xFF1c2143),
                 fontWeight: FontWeight.bold,
@@ -52,14 +53,14 @@ class SharePage extends StatelessWidget {
                   ),
                 ),
               ),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(
+              child:  Padding(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 24.0,
                   vertical: 12.0,
                 ),
                 child: Text(
-                  'Share',
-                  style: TextStyle(
+                  AppLocalizations.of(context)!.share_text,
+                  style: const TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
                   ),

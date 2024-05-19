@@ -6,6 +6,154 @@
   "change_language": "Change Language",
     "@change_language": {
         "description": "Change language text"
+    },
+  "home_text": "Home",
+  "@home_text": {
+    "description": "The nav drawer home text"
+  },
+  "profile_text": "Profile",
+    "@profile_text": {
+        "description": "The nav drawer profile text"
+    },
+  "routes_text": "Routes",
+    "@routes_text": {
+        "description": "The nav drawer routes text"
+    },
+  "map_text": "Map",
+    "@map_text": {
+        "description": "The nav drawer map text"
+    },
+  "feedback_text": "Feedback",
+    "@feedback_text": {
+        "description": "The nav drawer feedback text"
+    },
+  "share_text": "Share",
+    "@share_text": {
+        "description": "The nav drawer share text"
+    },
+  "home_welcome_text": "Welcome to Tripify! Here you can plan your trips and share your experiences with others.",
+  "@home_welcome_text": {
+    "description": "The home welcome text"
+  },
+  "home_go_to_profile": "Go to profile page",
+    "@home_go_to_profile": {
+        "description": "The home go to profile page text"
+    },
+  "share_page_text": "Share your experiences with others!",
+    "@share_page_text": {
+        "description": "The share page text"
+    },
+  "feedback_page_text": "We would love to hear your feedback!",
+    "@feedback_page_text": {
+        "description": "The feedback page text"
+    },
+  "feedback_raiting": "Rating",
+    "@feedback_raiting": {
+        "description": "The feedback rating text"
+    },
+  "feedback_comment": "Comment",
+    "@feedback_comment": {
+        "description": "The feedback comment text"
+    },
+    "feedback_send": "Send",
+    "@feedback_send": {
+        "description": "The feedback send text"
+    },
+  "feedback_hint": "Write your feedback here...",
+    "@feedback_hint": {
+        "description": "The feedback hint text"
+    },
+  "map_page_text": "Activate location and explore the world with our interactive map!",
+    "@map_page_text": {
+        "description": "The map page text"
+    },
+  "map_see_location": "See your location",
+    "@map_see_location": {
+        "description": "The map see location text"
+    },
+  "logout": "Log out",
+    "@logout": {
+        "description": "The logout text"
+    },
+  "logout_text": "You are currently logged in",
+    "@logout_text": {
+        "description": "The logout text"
+    },
+  "profile_go_to_home": "Go back to home page",
+    "@profile_go_to_home": {
+        "description": "The profile go to home page text"
+    },
+  "profile_email": "Email",
+    "@profile_email": {
+        "description": "The profile email text"
+    },
+  "profile_password": "Password",
+    "@profile_password": {
+        "description": "The profile password text"
+    },
+  "profile_email_hint": "Enter your email...",
+    "@profile_email_hint": {
+        "description": "The profile email hint text"
+    },
+    "profile_password_hint": "Enter your password...",
+    "@profile_password_hint": {
+        "description": "The profile password hint text"
+    },
+    "profile_login": "Log in",
+    "@profile_login": {
+        "description": "The profile login text"
+    },
+  "profile_register": "Register",
+    "@profile_register": {
+        "description": "The profile register text"
+    },
+  "profile_register_text": "Don't have an account yet?",
+    "@profile_register_text": {
+        "description": "The profile register text"
+    },
+  "profile_sign_in_with_google": "Sign in with Google",
+    "@profile_sign_in_with_google": {
+        "description": "The profile sign in with google text"
+    },
+  "profile_confirm_password": "Confirm Password",
+    "@profile_confirm_password": {
+        "description": "The profile confirm password text"
+    },
+    "profile_confirm_password_hint": "Confirm your password...",
+    "@profile_confirm_password_hint": {
+        "description": "The profile confirm password hint text"
+    },
+  "profile_create_account": "Create Account",
+    "@profile_create_account": {
+        "description": "The profile create account text"
+    },
+  "view_weather": "View Weather",
+    "@view_weather": {
+        "description": "The view weather text"
+    },
+  "view_route": "View Route",
+    "@view_route": {
+        "description": "The view route text"
+    },
+  "add_place": "Add Place",
+    "@add_place": {
+        "description": "The add place text"
+    },
+  "view_place": "View Place",
+    "@view_place": {
+        "description": "The view place text"
+    },
+  "delete_route": "Delete Route",
+    "@delete_place": {
+        "description": "The delete place text"
+    },
+  "view_places_offline": "View Places Offline Mode",
+    "@view_places_offline": {
+        "description": "The view places offline text"
+    },
+  "view_places_online": "Places in the route",
+    "@view_places_online": {
+        "description": "The view places online text"
     }
 }
 

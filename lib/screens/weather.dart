@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:project2_flutter/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather/weather.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({Key? key}) : super(key: key);
@@ -49,7 +50,7 @@ class _WeatherPageState extends State<WeatherPage> {
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        title: const Text('Weather'),
+        title: Text(AppLocalizations.of(context)!.view_weather),
       ),
       body: Card(
         color: const Color(0xfff6f0f0),

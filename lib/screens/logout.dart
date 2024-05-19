@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../main.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class LogoutPage extends StatefulWidget {
@@ -12,19 +13,6 @@ class _LogoutPageState extends State<LogoutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: const Color(0xFF1c2143),
-      //   title: const Text(
-      //     'Logout',
-      //     style: TextStyle(
-      //       color: Colors.white,
-      //       fontSize: 24.0,
-      //     ),
-      //   ),
-      //   iconTheme: const IconThemeData(
-      //     color: Colors.white,
-      //   ),
-      // ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -41,18 +29,18 @@ class _LogoutPageState extends State<LogoutPage> {
                   ),
                 ),
               ),
-              child: const Text(
-                'Log out',
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.logout,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,
                 ),
               ),
             ),
             const SizedBox(height: 16.0),
-            const Text(
-              'You are currently logged in',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.logout_text,
+              style: const TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF1c2143),

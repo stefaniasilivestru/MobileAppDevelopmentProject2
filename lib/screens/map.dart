@@ -6,6 +6,8 @@ import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:async';
 import 'package:project2_flutter/db/database_helper.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'mapView.dart';
 
@@ -32,15 +34,15 @@ class _MapPageState extends State<MapPage> {
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        title: const Text('Map'),
+        title:  Text(AppLocalizations.of(context)!.map_text),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Activate your location to be able to see it on map!',
+            Text(AppLocalizations.of(context)!.map_page_text,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF1c2143),
@@ -80,8 +82,12 @@ class _MapPageState extends State<MapPage> {
                   ),
                 ),
               ),
-              child: const Text('See location on map',
+              child: Text(AppLocalizations.of(context)!.map_see_location,
                 textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.white,
+                ),
               ),
             ),
 

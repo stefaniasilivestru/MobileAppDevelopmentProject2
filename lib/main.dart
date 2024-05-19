@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        title: Text(widget.title),
+        title: Text(AppLocalizations.of(context)!.home_text),
       ),
       drawer: Drawer(
         child: ListView(
@@ -70,14 +70,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               leading: const Icon(Icons.home, color: Color(0xFF1c2143)),
-              title: const Text('Home'),
+              title:  Text(AppLocalizations.of(context)!.home_text),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
               leading: const Icon(Icons.account_circle, color: Color(0xFF1c2143)),
-              title: const Text('Profile'),
+              title:  Text(AppLocalizations.of(context)!.profile_text),
               onTap: () {
                 Navigator.push(
                   context,
@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               leading: const Icon(Icons.collections, color: Color(0xFF1c2143)),
-              title: const Text('Routes'),
+              title: Text(AppLocalizations.of(context)!.routes_text),
               onTap: () {
                 Navigator.push(
                   context,
@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               leading: const Icon(Icons.map_rounded, color: Color(0xFF1c2143)),
-              title: const Text('Map'),
+              title:  Text(AppLocalizations.of(context)!.map_text),
               onTap: () {
                 Navigator.push(
                   context,
@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               leading: const Icon(Icons.call, color: Color(0xFF1c2143)),
-              title: const Text('Feedback'),
+              title: Text(AppLocalizations.of(context)!.feedback_text),
               onTap: () {
                 Navigator.push(
                   context,
@@ -117,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               leading: const Icon(Icons.ios_share_outlined, color: Color(0xFF1c2143)),
-              title: const Text('Share'),
+              title: Text(AppLocalizations.of(context)!.share_text),
               onTap: () {
                 Navigator.push(
                   context,
@@ -147,10 +147,9 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Image.asset("assets/logo_tripify.jpg"),
             const SizedBox(height: 20),
-            const Text(
-              'Welcome to Tripify! Here you can plan your trips and share your experiences with others.',
+            Text(AppLocalizations.of(context)!.home_welcome_text,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF1c2143),
@@ -173,10 +172,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-              child: const Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text('GO TO PROFILE PAGE',
-                  style: TextStyle(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(AppLocalizations.of(context)!.home_go_to_profile,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
                   ),

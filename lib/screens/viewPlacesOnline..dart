@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewPlacesOnlinePage extends StatefulWidget {
   const ViewPlacesOnlinePage({Key? key}) : super(key: key);
@@ -27,7 +27,6 @@ class _ViewPlacesOnlinePageState extends State<ViewPlacesOnlinePage> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +39,7 @@ class _ViewPlacesOnlinePageState extends State<ViewPlacesOnlinePage> {
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        title: const Text('View Places'),
+        title: Text(AppLocalizations.of(context)!.view_place),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -48,10 +47,10 @@ class _ViewPlacesOnlinePageState extends State<ViewPlacesOnlinePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const Text(
-              'Places in the route',
+            Text(
+              AppLocalizations.of(context)!.view_places_online,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF1c2143),
@@ -110,10 +109,16 @@ class _ViewPlacesOnlinePageState extends State<ViewPlacesOnlinePage> {
                                         ),
                                       ],
                                     ),
+                                    IconButton(
+                                      icon: const Icon(Icons.delete, color: Color(0xFF2a9d8f),),
+                                      onPressed: () {
+                                        FirebaseDatabase.instance.reference().child('routes').child(routeId).child('places').child(key).remove();
+                                      },
+                                    ),
                                   ],
                                 ),
                               ),
-                            )
+                            ),
                         );
                       });
                     } else {
