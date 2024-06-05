@@ -83,10 +83,16 @@ Include screenshots of the app in action. You can upload the images to GitHub an
     </td>
   </tr>
   <tr>
-  <td>
+    <td>
       <img src="img/message_login_required.png" width="80%" alt="Routes"/>
       <p align="center">Error - User need to be logged to perfom actions</p>
     </td>
+    <td>
+      <img src="img/error_register_passwords.png" width="80%" alt="Register"/>
+      <p align="center">Error - Passwords don't match</p>
+    </td>
+  </tr>
+  <tr>
     <td>
       <img src="img/routes_page_firebase.png" width="80%" alt="Routes"/>
       <p align="center">Routes - Using Firebase</p>
@@ -137,6 +143,8 @@ Include screenshots of the app in action. You can upload the images to GitHub an
       <img src="img/settings_screen_ES.png" width="80%" alt="Settings"/>
       <p align="center">Settings Screen ES</p>
     </td>
+  </tr>
+  <tr>
     <td>
       <img src="img/profile_page_ES.png" width="80%" alt="Share"/>
       <p align="center">Profile page in Spanish/p>
@@ -157,31 +165,46 @@ Video demonstrating how the app works (Max 1 video of 1 minute), upload it to a 
 
 ## Features
 
-List the **functional** features of the app. For example:
+List the **functional** features of the app.
 
-- Search for common routes in Madrid.
-- Filters by transport type.
-- Interactive maps.
-- Real-time traffic information.
+- Add routes and places using a specific criteria (e.g in our demo: routes in cities where famous movies and series were filmed)
+- Display route on map
+- Change language app
+- List your places offline and online
+- Delete and edit route
+- See weather for a specific route
+- Add/Edit/Deelete feedback based on your experience on app
 
-List the **technical** features of the app. You might include specific references to source code
-in your repo. For example:
+List the **technical** features of the app.
 
-- Persistence in csv/text file
-- Persistence in shared preferences
-- Persistence in Room database. Ref: [Source code](https://github.com/btabuenca/HelloWorldKt/blob/268a3367296238c76ec1baa18d0b5d268a49235f/app/src/main/java/es/upm/btb/helloworldkt/persistence/room/LocationEntity.kt#L6 "LocationEntity")
-- Firebase Realtime database
-- Firebase authentication
-- Maps: Openstreetmaps or Google maps
-- Resful APIs used (_e.g., Openwheathermaps https://openweathermap.org/api .Describe the api here_).
-- Menu: _e.g., Toolbar_
-- Images: _e.g. glide or picasso library_
-- Sensors: _e.g., GPS coordinates, noise meter, light meter, compass, gyroscope, ..._
-- ...
+- Persistence in csv/text file -> Coordinates + Timestamp of places
+- Persistence in Shared Preferences (routeName and routeId)
+- Persistence in local database - SQFLite
+- Display Data in UI using ListView
+- Widgets lifecycles
+- Use of Logging for debug
+- Pop-up messages: Alerts, Toasts, Dialogues, Snackbars
+- Firebase Realtime database : on routes and feedbacks
+- Firebase Authentication
+- Maps: OpenStreetMaps - geolocating coordinates using it
+- Restful APIs used: (_Openwheathermaps https://openweathermap.org/api .Retrieve weather information data based on specific location_).
+- Menu: Navigation Drawer Menu
+- Internationalizing App (EN/ES language available: Flutter_localizations package
+- Splash Screen
+- Replace icon using flutter_launcher_icons
 
 ## How to Use
 
-Provide instructions on how to get started with the app as user.
+How to get started with the app as user:
+- Create an account using Email & Password or Sign up by Gmail
+- Log in into your account
+- Add a route by typing the city where the route will be located
+- Choose your niche route (eg: route where famous movies were filmed)
+- Add places
+- Choose what actions to perform: see weather details, see route on map, delete your route
+- If needed, change your app language
+- If needed, share your feedback on Gmail to the creators of the app or with other users posting reviews
+- If needed, tell your friends about your routes
 
 ## Additional section
 
