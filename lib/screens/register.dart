@@ -67,6 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     contentPadding: const EdgeInsets.all(12.0),
                   ),
                 ),
+                const SizedBox(height: 16.0),
                TextField(
                   controller: _confirmPasswordController,
                   decoration: InputDecoration(
@@ -79,7 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
-                    _singUp();
+                    _signUp();
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF1c2143)), // Background color
@@ -103,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void _singUp() async {
+  void _signUp() async {
     String email = _emailController.text;
     String password = _passwordController.text;
 

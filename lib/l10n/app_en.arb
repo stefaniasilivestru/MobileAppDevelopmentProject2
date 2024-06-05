@@ -139,7 +139,7 @@
     "@add_place": {
         "description": "The add place text"
     },
-  "view_place": "View Place",
+  "view_place": "View Places",
     "@view_place": {
         "description": "The view place text"
     },
