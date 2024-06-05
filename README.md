@@ -158,9 +158,7 @@ Include screenshots of the app in action. You can upload the images to GitHub an
 
 ## Demo Video
 
-Video demonstrating how the app works:  
-<a href="https://shorturl.at/XQ1D5">
-</a>
+Video demonstrating how the app works: https://shorturl.at/XQ1D5
 
 ## Features
 
