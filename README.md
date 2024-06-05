@@ -147,11 +147,11 @@ Include screenshots of the app in action. You can upload the images to GitHub an
   <tr>
     <td>
       <img src="img/profile_page_ES.png" width="80%" alt="Share"/>
-      <p align="center">Profile page in Spanish/p>
+      <p align="center">Profile page in Spanish</p>
     </td>
     <td>
       <img src="img/profile_page_login.png" width="80%" alt="Share"/>
-      <p align="center">Profile page in English/p>
+      <p align="center">Profile page in English</p>
     </td>
   </tr>
 </table>
