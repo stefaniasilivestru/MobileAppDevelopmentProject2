@@ -264,11 +264,11 @@ class _RoutesPageState extends State<RoutesPage> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Log in Required'),
-            content: const SingleChildScrollView(
+            title: Text(AppLocalizations.of(context)!.login_required),
+            content:SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text('You need to log in to add routes.'),
+                  Text(AppLocalizations.of(context)!.login_required_text),
                 ],
               ),
             ),
@@ -280,7 +280,7 @@ class _RoutesPageState extends State<RoutesPage> {
                 },
               ),
               TextButton(
-                child: const Text('Log in'),
+                child: Text(AppLocalizations.of(context)!.profile_login),
                 onPressed: () {
                   Navigator.of(context).pop();
                   Navigator.push(

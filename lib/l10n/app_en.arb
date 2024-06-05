@@ -154,6 +154,15 @@
   "view_places_online": "Places in the route",
     "@view_places_online": {
         "description": "The view places online text"
+    },
+  "login_required": "Log in Required",
+    "@login_required": {
+        "description": "The login required text"
+    },
+  "login_required_text": "You need to be logged in to access this feature",
+    "@login_required_text": {
+        "description": "The login required text"
     }
+
 }
 

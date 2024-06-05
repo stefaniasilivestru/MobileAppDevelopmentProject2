@@ -37,5 +37,7 @@
   "view_place": "Ver lugares",
   "delete_route": "Eliminar ruta",
   "view_places_offline": "Ver lugares sin conexión",
-  "view_places_online": "Ver lugares en línea"
+  "view_places_online": "Ver lugares en línea",
+  "login_required": "Inicia sesión para continuar",
+  "login_required_text": "Debes iniciar sesión para acceder a esta página"
 }
