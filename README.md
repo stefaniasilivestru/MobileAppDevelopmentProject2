@@ -68,6 +68,84 @@ Include screenshots of the app in action. You can upload the images to GitHub an
       <p align="center">Map View - local database</p>
     </td>
   </tr>
+  <tr>
+    <td>
+      <img src="img/routes_offline_local_database.png" width="80%" alt="Places - Local Database"/>
+      <p align="center">Places - Local Database</p>
+    </td>
+    <td>
+      <img src="img/routes_offline_local_database_update.png" width="80%" alt="Places - Local Database"/>
+      <p align="center">Places - Update</p>
+    </td>
+    <td>
+      <img src="img/routes_offline_local_database_delete.png" width="80%" alt="Places - Local Database"/>
+      <p align="center">Places - Delete</p>
+    </td>
+  </tr>
+  <tr>
+  <td>
+      <img src="img/message_login_required.png" width="80%" alt="Routes"/>
+      <p align="center">Error - User need to be logged to perfom actions</p>
+    </td>
+    <td>
+      <img src="img/routes_page_firebase.png" width="80%" alt="Routes"/>
+      <p align="center">Routes - Using Firebase</p>
+    </td>
+    <td>
+      <img src="img/add_place_route.png" width="80%" alt="Routes"/>
+      <p align="center">Add place</p>
+    </td>
+    <td>
+      <img src="img/add_route.png" width="80%" alt="Routes"/>
+      <p align="center">Add route</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="img/view_places_route.png" width="80%" alt="Routes"/>
+      <p align="center">View Places - Firebase</p>
+    </td>
+    <td>
+      <img src="img/view_route_map.png" width="80%" alt="Routes"/>
+      <p align="center">View route on map</p>
+    </td>
+    <td>
+      <img src="img/delete_route.png" width="80%" alt="Routes"/>
+      <p align="center">Delete route</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="img/weather_screen.png" width="80%" alt="Routes"/>
+      <p align="center">See weather</p>
+    </td>
+    <td>
+      <img src="img/feedback_page.png" width="80%" alt="Feedback"/>
+      <p align="center">Feedback Screen</p>
+    </td>
+    <td>
+      <img src="img/share_screen.png" width="80%" alt="Share"/>
+      <p align="center">Share Screen</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="img/settings_screen.png" width="80%" alt="Settings"/>
+      <p align="center">Settings Screen</p>
+    </td>
+    <td>
+      <img src="img/settings_screen_ES.png" width="80%" alt="Settings"/>
+      <p align="center">Settings Screen ES</p>
+    </td>
+    <td>
+      <img src="img/profile_page_ES.png" width="80%" alt="Share"/>
+      <p align="center">Profile page in Spanish/p>
+    </td>
+    <td>
+      <img src="img/profile_page_login.png" width="80%" alt="Share"/>
+      <p align="center">Profile page in English/p>
+    </td>
+  </tr>
 </table>
 
 ## Demo Video
